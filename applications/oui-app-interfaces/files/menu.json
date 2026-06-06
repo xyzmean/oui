@@ -1,0 +1,12 @@
+{
+    "/network/interfaces": {
+        "title": "Interfaces",
+        "view": "interfaces",
+        "index": 0,
+        "locales": {
+            "en": "Interfaces",
+            "ru": "Интерфейсы",
+            "zh-CN": "接口"
+        }
+    }
+}

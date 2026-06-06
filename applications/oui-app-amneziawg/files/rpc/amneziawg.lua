@@ -60,49 +60,54 @@ end
 
 function M.list()
     local c = uci.cursor()
-    local interfaces = {}
 
+    -- Pass 1: gather UCI data only (no yielding calls inside uci:foreach — ubus
+    -- and io.popen would yield across the C-call boundary and abort).
+    local raw = {}
     c:foreach('network', 'interface', function(s)
         if s['.type'] ~= 'interface' or s.proto ~= 'amneziawg' then return end
-        local name = s['.name']
         local obf = {}
         for _, k in ipairs(OBF) do obf[k] = s[k] or '' end
-
-        local link = link_status(name)
-        local up = false
-        local st = ubus.call('network.interface.' .. name, 'status', {})
-        if st and st.up then up = true end
-
-        local peers = {}
-        c:foreach('network', 'amneziawg_' .. name, function(p)
-            local pub = p.public_key or ''
-            local ls = link[pub] or {}
-            peers[#peers + 1] = {
-                sid = p['.name'],
-                public_key = pub,
-                endpoint_host = p.endpoint_host or '',
-                endpoint_port = p.endpoint_port or '',
-                allowed_ips = as_list(p.allowed_ips),
-                persistent_keepalive = p.persistent_keepalive or '',
-                disabled = (p.disabled == '1'),
-                handshake = ls.handshake or 0,
-                rx = ls.rx or 0, tx = ls.tx or 0,
-                endpoint_live = ls.endpoint or ''
-            }
-        end)
-
-        interfaces[#interfaces + 1] = {
-            name = name,
+        raw[#raw + 1] = {
+            name = s['.name'],
             private_key = s.private_key or '',
-            public_key = pubkey_of(s.private_key),
             listen_port = s.listen_port or '',
             mtu = s.mtu or '',
             addresses = as_list(s.addresses),
             obf = obf,
-            up = up,
-            peers = peers
+            peers = {}
         }
     end)
+    for _, it in ipairs(raw) do
+        c:foreach('network', 'amneziawg_' .. it.name, function(p)
+            it.peers[#it.peers + 1] = {
+                sid = p['.name'],
+                public_key = p.public_key or '',
+                endpoint_host = p.endpoint_host or '',
+                endpoint_port = p.endpoint_port or '',
+                allowed_ips = as_list(p.allowed_ips),
+                persistent_keepalive = p.persistent_keepalive or '',
+                disabled = (p.disabled == '1')
+            }
+        end)
+    end
+
+    -- Pass 2: enrich with live link/handshake (awg) + iface up (ubus).
+    local interfaces = {}
+    for _, it in ipairs(raw) do
+        local link = link_status(it.name)
+        local st = ubus.call('network.interface.' .. it.name, 'status', {})
+        for _, peer in ipairs(it.peers) do
+            local ls = link[peer.public_key] or {}
+            peer.handshake = ls.handshake or 0
+            peer.rx = ls.rx or 0
+            peer.tx = ls.tx or 0
+            peer.endpoint_live = ls.endpoint or ''
+        end
+        it.public_key = pubkey_of(it.private_key)
+        it.up = (st and st.up) and true or false
+        interfaces[#interfaces + 1] = it
+    end
 
     return { interfaces = interfaces }
 end
