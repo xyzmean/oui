@@ -1,0 +1,140 @@
+/*
+ * VenusWRT design system — clean minimalism.
+ *
+ * Principles: one calm accent, a precise neutral scale, hairline borders over
+ * shadows, generous whitespace, dense readable tables, tabular numerals for
+ * data. No gradients, no orbs, no decoration. Light by default, full dark mode.
+ * Shipped once in oui-ui-core; every app view inherits it for free (no per-app
+ * CSS cost — important for the router flash budget).
+ */
+
+:root {
+  /* neutral scale (light) */
+  --ds-bg:        #f5f6f8;
+  --ds-surface:   #ffffff;
+  --ds-surface-2: #fbfbfc;
+  --ds-border:    #e6e8ec;
+  --ds-border-strong: #d3d7de;
+  --ds-text:      #1b1f24;
+  --ds-text-2:    #5b626d;
+  --ds-text-3:    #8b919c;
+
+  /* single restrained accent (precise azure) + semantic */
+  --ds-accent:        #2f6feb;
+  --ds-accent-hover:  #4380f5;
+  --ds-accent-active: #2057c4;
+  --ds-accent-weak:   #eaf1fe;
+  --ds-ok:    #1f9d57;
+  --ds-ok-weak:   #e7f6ee;
+  --ds-warn:  #c2820a;
+  --ds-warn-weak: #fbf2dc;
+  --ds-err:   #d4373a;
+  --ds-err-weak:  #fceaea;
+  --ds-muted: #8b919c;
+
+  /* shape & motion */
+  --ds-radius:    10px;
+  --ds-radius-sm: 7px;
+  --ds-radius-pill: 999px;
+  --ds-shadow:    0 1px 2px rgba(16, 24, 40, .05);
+  --ds-shadow-pop: 0 6px 24px rgba(16, 24, 40, .10);
+  --ds-ring: 0 0 0 3px var(--ds-accent-weak);
+  --ds-dur: .16s;
+
+  /* spacing step (8pt-ish) */
+  --ds-1: 4px; --ds-2: 8px; --ds-3: 12px; --ds-4: 16px;
+  --ds-5: 24px; --ds-6: 32px; --ds-7: 48px;
+
+  /* typography — system stack (zero flash cost), tuned for character */
+  --ds-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --ds-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+
+  /* map Element Plus tokens onto the system (so el-* components match) */
+  --el-color-primary: var(--ds-accent);
+  --el-color-primary-light-3: #6e9bf6;
+  --el-color-primary-light-5: #9cbcf9;
+  --el-color-primary-light-7: #c7dafc;
+  --el-color-primary-light-8: #dde9fe;
+  --el-color-primary-light-9: var(--ds-accent-weak);
+  --el-color-primary-dark-2: var(--ds-accent-active);
+  --el-color-success: var(--ds-ok);
+  --el-color-warning: var(--ds-warn);
+  --el-color-danger:  var(--ds-err);
+  --el-color-error:   var(--ds-err);
+  --el-border-radius-base: var(--ds-radius-sm);
+  --el-border-color: var(--ds-border);
+  --el-border-color-light: var(--ds-border);
+  --el-fill-color-blank: var(--ds-surface);
+  --el-bg-color: var(--ds-surface);
+  --el-bg-color-page: var(--ds-bg);
+  --el-text-color-primary: var(--ds-text);
+  --el-text-color-regular: var(--ds-text-2);
+  --el-font-family: var(--ds-font);
+  --el-box-shadow-light: var(--ds-shadow);
+}
+
+html.dark {
+  --ds-bg:        #0e1014;
+  --ds-surface:   #161a20;
+  --ds-surface-2: #1b2027;
+  --ds-border:    #262c35;
+  --ds-border-strong: #333b47;
+  --ds-text:      #e7e9ed;
+  --ds-text-2:    #9aa2af;
+  --ds-text-3:    #6b7280;
+
+  --ds-accent:        #5a8bff;
+  --ds-accent-hover:  #6e9bff;
+  --ds-accent-active: #3f73f0;
+  --ds-accent-weak:   #18233c;
+  --ds-ok-weak:   #102a1d;
+  --ds-warn-weak: #2c2410;
+  --ds-err-weak:  #2e1718;
+  --ds-shadow:    0 1px 2px rgba(0, 0, 0, .35);
+  --ds-shadow-pop: 0 8px 30px rgba(0, 0, 0, .5);
+
+  --el-bg-color: var(--ds-surface);
+  --el-bg-color-page: var(--ds-bg);
+  --el-border-color: var(--ds-border);
+  --el-border-color-light: var(--ds-border);
+  --el-fill-color-blank: var(--ds-surface);
+  --el-text-color-primary: var(--ds-text);
+  --el-text-color-regular: var(--ds-text-2);
+}
+
+/* ---- base ---- */
+body, #app {
+  font-family: var(--ds-font);
+  color: var(--ds-text);
+  background: var(--ds-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.ds-num, .el-table td .cell, code, kbd, pre { font-variant-numeric: tabular-nums; }
+
+/* ---- layout helpers (used by app views) ---- */
+.ds-page    { display: flex; flex-direction: column; gap: var(--ds-5); padding: var(--ds-2) 0; }
+.ds-grid    { display: grid; gap: var(--ds-4); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.ds-row     { display: flex; gap: var(--ds-3); align-items: center; flex-wrap: wrap; }
+.ds-row-end { display: flex; gap: var(--ds-2); align-items: center; margin-left: auto; }
+.ds-stack   { display: flex; flex-direction: column; gap: var(--ds-3); }
+.ds-spacer  { flex: 1 1 auto; }
+.ds-muted   { color: var(--ds-text-2); }
+.ds-faint   { color: var(--ds-text-3); }
+.ds-mono    { font-family: var(--ds-mono); font-variant-numeric: tabular-nums; }
+
+/* ---- typography ---- */
+.ds-h1 { font-size: 20px; font-weight: 680; letter-spacing: -.01em; margin: 0; }
+.ds-h2 { font-size: 15px; font-weight: 640; letter-spacing: -.005em; margin: 0; }
+.ds-sub { font-size: 13px; color: var(--ds-text-2); margin: 0; }
+.ds-label { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ds-text-3); }
+
+/* ---- Element Plus minimalist nudges ---- */
+.el-card { border-radius: var(--ds-radius); border-color: var(--ds-border); box-shadow: none; }
+.el-button { font-weight: 560; }
+.el-table { --el-table-border-color: var(--ds-border); --el-table-header-bg-color: var(--ds-surface-2); }
+.el-table th.el-table__cell { font-weight: 600; color: var(--ds-text-2); }
+.el-menu { border-right: 1px solid var(--ds-border); }
+.el-menu-item.is-active { color: var(--ds-accent); }
+.el-input__wrapper, .el-textarea__inner { border-radius: var(--ds-radius-sm); }
+:focus-visible { outline: none; box-shadow: var(--ds-ring); border-radius: var(--ds-radius-sm); }
