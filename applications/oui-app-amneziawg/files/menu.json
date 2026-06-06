@@ -1,0 +1,13 @@
+{
+    "/amneziawg": {
+        "title": "AmneziaWG",
+        "view": "amneziawg",
+        "index": 4,
+        "locales": {
+            "en": "AmneziaWG",
+            "ru": "AmneziaWG",
+            "zh-CN": "AmneziaWG"
+        },
+        "svg": {"-xmlns": "http://www.w3.org/2000/svg", "-viewBox": "0 0 24 24", "path": {"-d": "M12 2 4 6v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V6l-8-4zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6z", "-fill": "none", "-stroke": "currentColor", "-stroke-width": "2", "-stroke-linejoin": "round"}}
+    }
+}
