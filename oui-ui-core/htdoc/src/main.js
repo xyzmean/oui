@@ -13,6 +13,9 @@ import i18n from './i18n'
 import oui from './oui'
 import ElementPlus from './element-plus'
 
+/* VenusWRT sky/ember brand — overrides Element Plus palette (load last). */
+import './assets/venus-brand.css'
+
 const app = createApp(App)
 
 app.use(VueAxios, axios)

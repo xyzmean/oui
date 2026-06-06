@@ -1,0 +1,13 @@
+{
+    "/venus": {
+        "title": "Venus",
+        "view": "venus",
+        "index": 1,
+        "locales": {
+            "en": "Venus",
+            "ru": "Venus",
+            "zh-CN": "Venus"
+        },
+        "svg": {"-xmlns": "http://www.w3.org/2000/svg", "-viewBox": "0 0 24 24", "path": {"-d": "M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8zm0 10c1.5 0 2.7 1.1 2.9 2.5A7.9 7.9 0 0 1 12 20a7.9 7.9 0 0 1-2.9-1.5A3 3 0 0 1 12 16z", "-fill": "currentColor"}}
+    }
+}

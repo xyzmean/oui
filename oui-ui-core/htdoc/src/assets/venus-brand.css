@@ -1,0 +1,51 @@
+/*
+ * VenusWRT brand palette for OUI / Element Plus.
+ * "Venus the planet — blue/calm outside, red/hot engine inside."
+ *   sky   #0ea5e9  (sky-500)  — calm outer surface / primary
+ *   ember #ef4444 → #b91c1c    — deep/engine/danger surfaces
+ */
+
+:root {
+  --venus-sky: #0ea5e9;
+  --venus-sky-light: #38bdf8;
+  --venus-sky-dark: #0284c7;
+  --venus-ember: #ef4444;
+  --venus-ember-dark: #b91c1c;
+
+  /* primary -> sky */
+  --el-color-primary: #0ea5e9;
+  --el-color-primary-light-3: #38bdf8;
+  --el-color-primary-light-5: #7dd3fc;
+  --el-color-primary-light-7: #bae6fd;
+  --el-color-primary-light-8: #e0f2fe;
+  --el-color-primary-light-9: #f0f9ff;
+  --el-color-primary-dark-2: #0284c7;
+
+  /* danger/error -> ember */
+  --el-color-danger: #ef4444;
+  --el-color-danger-light-3: #f87171;
+  --el-color-danger-light-5: #fca5a5;
+  --el-color-danger-dark-2: #b91c1c;
+  --el-color-error: #ef4444;
+  --el-color-error-dark-2: #b91c1c;
+}
+
+/* Dark mode: keep sky vivid against the deep surface. */
+html.dark {
+  --el-color-primary: #38bdf8;
+  --el-color-primary-dark-2: #0ea5e9;
+  --el-color-danger: #f87171;
+  --el-color-error: #f87171;
+}
+
+/* Brand accent on the layout header / active menu, where OUI exposes them. */
+.el-menu-item.is-active {
+  border-left: 3px solid var(--venus-sky);
+}
+.el-button--primary {
+  --el-button-bg-color: var(--venus-sky);
+  --el-button-border-color: var(--venus-sky);
+  --el-button-hover-bg-color: var(--venus-sky-light);
+  --el-button-hover-border-color: var(--venus-sky-light);
+  --el-button-active-bg-color: var(--venus-sky-dark);
+}
