@@ -23,6 +23,7 @@ define Package/oui-rpc-core
   URL:=https://github.com/zhaojh329/oui
   DEPENDS:=+lua-cjson-lua5.4 +lua-eco-uci +lua-eco-md5 +lua-eco-ubus +lua-eco-log \
   		+lua-eco-socket +lighttpd +lighttpd-mod-scgi +lighttpd-mod-magnet
+  PKGARCH:=all
 endef
 
 Build/Compile=
