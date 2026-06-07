@@ -37,10 +37,10 @@ export default {
   content: ''; position: absolute; left: 0; top: 10px; bottom: 10px; width: 3px;
   border-radius: 3px; background: var(--ds-border-strong);
 }
-.is-ok::before     { background: var(--ds-ok); }
-.is-warn::before   { background: var(--ds-warn); }
-.is-err::before    { background: var(--ds-err); }
-.is-accent::before { background: var(--ds-accent); }
+.is-ok::before     { background: var(--ds-ok);     box-shadow: 0 0 12px var(--ds-ok); }
+.is-warn::before   { background: var(--ds-warn);   box-shadow: 0 0 12px var(--ds-warn); }
+.is-err::before    { background: var(--ds-err);    box-shadow: 0 0 12px var(--ds-err); }
+.is-accent::before { background: var(--ds-accent); box-shadow: 0 0 12px var(--ds-accent); }
 .oui-stat__label { margin-bottom: 6px; }
 .oui-stat__value { font-size: 22px; font-weight: 680; letter-spacing: -.01em; line-height: 1.1; overflow-wrap: anywhere; }
 .oui-stat__hint { margin-top: 4px; font-size: 12px; color: var(--ds-text-2); }

@@ -24,7 +24,7 @@ export default {
   font-size: 12px; font-weight: 600; line-height: 1.6;
   border: 1px solid transparent; white-space: nowrap;
 }
-.oui-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.oui-badge__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; box-shadow: 0 0 6px currentColor; }
 .is-muted  { color: var(--ds-text-2); background: var(--ds-surface-2); border-color: var(--ds-border); }
 .is-ok     { color: var(--ds-ok);   background: var(--ds-ok-weak); }
 .is-warn   { color: var(--ds-warn); background: var(--ds-warn-weak); }

@@ -1,60 +1,70 @@
 /*
- * VenusWRT design system — clean minimalism.
+ * VenusWRT design system — "Orbital Telemetry".
  *
- * Principles: one calm accent, a precise neutral scale, hairline borders over
- * shadows, generous whitespace, dense readable tables, tabular numerals for
- * data. No gradients, no orbs, no decoration. Light by default, full dark mode.
- * Shipped once in oui-ui-core; every app view inherits it for free (no per-app
- * CSS cost — important for the router flash budget).
+ * A ground-station console reading telemetry off the Venus probe: deep
+ * space-ink navy outside (the planet's calm atmosphere), a duotone signal of
+ * plasma-cyan (data / primary actions) and ember-orange (the hot inner engine /
+ * brand). Hairlines over shadows, faint grid + radial glow for depth, glowing
+ * status, monospace telemetry, a geometric-technical display face (Exo 2).
+ * Shipped once in oui-ui-core; every app view inherits it (no per-app cost).
  */
 
+/* — display face: Exo 2 (latin + cyrillic, self-hosted for offline routers) — */
+@font-face{font-family:'Exo 2';font-style:normal;font-weight:500;font-display:swap;src:url('./fonts/exo2-cyrillic-500.woff2') format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Exo 2';font-style:normal;font-weight:500;font-display:swap;src:url('./fonts/exo2-latin-500.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Exo 2';font-style:normal;font-weight:700;font-display:swap;src:url('./fonts/exo2-cyrillic-700.woff2') format('woff2');unicode-range:U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;}
+@font-face{font-family:'Exo 2';font-style:normal;font-weight:700;font-display:swap;src:url('./fonts/exo2-latin-700.woff2') format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+
 :root {
-  /* neutral scale (light) */
-  --ds-bg:        #f5f6f8;
-  --ds-surface:   #ffffff;
-  --ds-surface-2: #fbfbfc;
-  --ds-border:    #e6e8ec;
-  --ds-border-strong: #d3d7de;
-  --ds-text:      #1b1f24;
-  --ds-text-2:    #5b626d;
-  --ds-text-3:    #8b919c;
+  /* deep-space neutral scale (dark is the primary theme) */
+  --ds-bg:        #070b13;
+  --ds-surface:   #0f1726;
+  --ds-surface-2: #0b1220;
+  --ds-border:    #1a2740;
+  --ds-border-strong: #2a3c5e;
+  --ds-text:      #e9eef8;
+  --ds-text-2:    #8a99b6;
+  --ds-text-3:    #56627e;
 
-  /* single restrained accent (precise azure) + semantic */
-  --ds-accent:        #2f6feb;
-  --ds-accent-hover:  #4380f5;
-  --ds-accent-active: #2057c4;
-  --ds-accent-weak:   #eaf1fe;
-  --ds-ok:    #1f9d57;
-  --ds-ok-weak:   #e7f6ee;
-  --ds-warn:  #c2820a;
-  --ds-warn-weak: #fbf2dc;
-  --ds-err:   #d4373a;
-  --ds-err-weak:  #fceaea;
-  --ds-muted: #8b919c;
+  /* duotone signal: cyan (calm/outer/data) + ember (hot/inner/brand) */
+  --ds-accent:        #2fc6e8;
+  --ds-accent-hover:  #57d5f1;
+  --ds-accent-active: #1aa6c8;
+  --ds-accent-weak:   rgba(47, 198, 232, .12);
+  --ds-ember:         #ff8a3d;
+  --ds-ember-2:       #ff6a4d;
+  --ds-ember-weak:    rgba(255, 138, 61, .13);
 
-  /* shape & motion */
-  --ds-radius:    10px;
-  --ds-radius-sm: 7px;
+  /* semantic (slightly luminous) */
+  --ds-ok:    #2fd39b;  --ds-ok-weak:   rgba(47, 211, 155, .13);
+  --ds-warn:  #f5b13a;  --ds-warn-weak: rgba(245, 177, 58, .14);
+  --ds-err:   #ff6b6b;  --ds-err-weak:  rgba(255, 107, 107, .13);
+  --ds-muted: #56627e;
+
+  /* shape, depth, motion */
+  --ds-radius:    12px;
+  --ds-radius-sm: 8px;
   --ds-radius-pill: 999px;
-  --ds-shadow:    0 1px 2px rgba(16, 24, 40, .05);
-  --ds-shadow-pop: 0 6px 24px rgba(16, 24, 40, .10);
+  --ds-shadow:     0 1px 2px rgba(0, 0, 0, .4), 0 8px 24px -16px rgba(0, 0, 0, .6);
+  --ds-shadow-pop: 0 10px 40px rgba(0, 0, 0, .55);
+  --ds-glow-accent: 0 0 0 1px rgba(47, 198, 232, .35), 0 0 18px rgba(47, 198, 232, .22);
   --ds-ring: 0 0 0 3px var(--ds-accent-weak);
   --ds-dur: .16s;
 
-  /* spacing step (8pt-ish) */
   --ds-1: 4px; --ds-2: 8px; --ds-3: 12px; --ds-4: 16px;
   --ds-5: 24px; --ds-6: 32px; --ds-7: 48px;
 
-  /* typography — system stack (zero flash cost), tuned for character */
-  --ds-font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  --ds-mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  /* typography: Exo 2 display, system body, mono telemetry */
+  --ds-display: 'Exo 2', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --ds-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  --ds-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace;
 
-  /* map Element Plus tokens onto the system (so el-* components match) */
+  /* Element Plus token mapping → cyan primary on the ink surfaces */
   --el-color-primary: var(--ds-accent);
-  --el-color-primary-light-3: #6e9bf6;
-  --el-color-primary-light-5: #9cbcf9;
-  --el-color-primary-light-7: #c7dafc;
-  --el-color-primary-light-8: #dde9fe;
+  --el-color-primary-light-3: #5bcfee;
+  --el-color-primary-light-5: #84dcf2;
+  --el-color-primary-light-7: #abe6f6;
+  --el-color-primary-light-8: #c9effa;
   --el-color-primary-light-9: var(--ds-accent-weak);
   --el-color-primary-dark-2: var(--ds-accent-active);
   --el-color-success: var(--ds-ok);
@@ -67,42 +77,41 @@
   --el-fill-color-blank: var(--ds-surface);
   --el-bg-color: var(--ds-surface);
   --el-bg-color-page: var(--ds-bg);
+  --el-bg-color-overlay: var(--ds-surface);
   --el-text-color-primary: var(--ds-text);
   --el-text-color-regular: var(--ds-text-2);
   --el-font-family: var(--ds-font);
   --el-box-shadow-light: var(--ds-shadow);
+  --el-fill-color-light: var(--ds-surface-2);
+  --el-fill-color-lighter: var(--ds-surface-2);
+  --el-mask-color: rgba(4, 7, 13, .65);
 }
 
-html.dark {
-  --ds-bg:        #0e1014;
-  --ds-surface:   #161a20;
-  --ds-surface-2: #1b2027;
-  --ds-border:    #262c35;
-  --ds-border-strong: #333b47;
-  --ds-text:      #e7e9ed;
-  --ds-text-2:    #9aa2af;
-  --ds-text-3:    #6b7280;
-
-  --ds-accent:        #5a8bff;
-  --ds-accent-hover:  #6e9bff;
-  --ds-accent-active: #3f73f0;
-  --ds-accent-weak:   #18233c;
-  --ds-ok-weak:   #102a1d;
-  --ds-warn-weak: #2c2410;
-  --ds-err-weak:  #2e1718;
-  --ds-shadow:    0 1px 2px rgba(0, 0, 0, .35);
-  --ds-shadow-pop: 0 8px 30px rgba(0, 0, 0, .5);
-
-  --el-bg-color: var(--ds-surface);
-  --el-bg-color-page: var(--ds-bg);
-  --el-border-color: var(--ds-border);
-  --el-border-color-light: var(--ds-border);
-  --el-fill-color-blank: var(--ds-surface);
-  --el-text-color-primary: var(--ds-text);
-  --el-text-color-regular: var(--ds-text-2);
+/* Light theme keeps the technical cyan/ember signal on cool paper. */
+html.light, :root.light {
+  --ds-bg:        #eaeef5;
+  --ds-surface:   #ffffff;
+  --ds-surface-2: #f3f6fb;
+  --ds-border:    #d9e0ec;
+  --ds-border-strong: #c2cdde;
+  --ds-text:      #0b1220;
+  --ds-text-2:    #51607a;
+  --ds-text-3:    #8593ab;
+  --ds-accent:        #0e90b3;
+  --ds-accent-hover:  #12a3c9;
+  --ds-accent-active: #0b7a98;
+  --ds-accent-weak:   rgba(14, 144, 179, .10);
+  --ds-ember:         #e0701e;
+  --ds-ember-weak:    rgba(224, 112, 30, .12);
+  --ds-ok:    #15a06f; --ds-ok-weak:   rgba(21, 160, 111, .10);
+  --ds-warn:  #b9831a; --ds-warn-weak: rgba(185, 131, 26, .12);
+  --ds-err:   #d6443f; --ds-err-weak:  rgba(214, 68, 63, .10);
+  --ds-shadow:     0 1px 2px rgba(16, 24, 40, .06), 0 8px 24px -18px rgba(16, 24, 40, .25);
+  --ds-glow-accent: 0 0 0 1px rgba(14, 144, 179, .25);
+  --el-mask-color: rgba(16, 24, 40, .35);
 }
 
-/* ---- base ---- */
+/* ---- base + atmosphere ---- */
 body, #app {
   font-family: var(--ds-font);
   color: var(--ds-text);
@@ -110,9 +119,21 @@ body, #app {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+/* layered radial glow (ember top-right, cyan left) + faint instrument grid */
+#app {
+  background-color: var(--ds-bg);
+  background-image:
+    radial-gradient(900px 520px at 88% -8%, var(--ds-ember-weak), transparent 60%),
+    radial-gradient(1000px 680px at -8% 18%, var(--ds-accent-weak), transparent 55%),
+    linear-gradient(transparent 0, transparent 31px, color-mix(in srgb, var(--ds-border) 22%, transparent) 32px),
+    linear-gradient(90deg, transparent 0, transparent 31px, color-mix(in srgb, var(--ds-border) 22%, transparent) 32px);
+  background-size: 100% 100%, 100% 100%, 32px 32px, 32px 32px;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
 .ds-num, .el-table td .cell, code, kbd, pre { font-variant-numeric: tabular-nums; }
 
-/* ---- layout helpers (used by app views) ---- */
+/* ---- layout helpers ---- */
 .ds-page    { display: flex; flex-direction: column; gap: var(--ds-5); padding: var(--ds-2) 0; }
 .ds-grid    { display: grid; gap: var(--ds-4); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .ds-row     { display: flex; gap: var(--ds-3); align-items: center; flex-wrap: wrap; }
@@ -121,20 +142,52 @@ body, #app {
 .ds-spacer  { flex: 1 1 auto; }
 .ds-muted   { color: var(--ds-text-2); }
 .ds-faint   { color: var(--ds-text-3); }
-.ds-mono    { font-family: var(--ds-mono); font-variant-numeric: tabular-nums; }
+.ds-mono    { font-family: var(--ds-mono); font-variant-numeric: tabular-nums; letter-spacing: -.01em; }
 
-/* ---- typography ---- */
-.ds-h1 { font-size: 20px; font-weight: 680; letter-spacing: -.01em; margin: 0; }
-.ds-h2 { font-size: 15px; font-weight: 640; letter-spacing: -.005em; margin: 0; }
+/* ---- typography (display face for headings + technical labels) ---- */
+.ds-h1 { font-family: var(--ds-display); font-size: 21px; font-weight: 700; letter-spacing: .005em; margin: 0; }
+.ds-h2 { font-family: var(--ds-display); font-size: 15px; font-weight: 600; letter-spacing: .01em; margin: 0; }
 .ds-sub { font-size: 13px; color: var(--ds-text-2); margin: 0; }
-.ds-label { font-size: 11px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; color: var(--ds-text-3); }
+.ds-label {
+  font-family: var(--ds-display); font-size: 10.5px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--ds-text-3);
+}
 
-/* ---- Element Plus minimalist nudges ---- */
-.el-card { border-radius: var(--ds-radius); border-color: var(--ds-border); box-shadow: none; }
+/* ---- Element Plus surface nudges ---- */
+.el-card { border-radius: var(--ds-radius); border-color: var(--ds-border); box-shadow: none; background: var(--ds-surface); }
 .el-button { font-weight: 560; }
-.el-table { --el-table-border-color: var(--ds-border); --el-table-header-bg-color: var(--ds-surface-2); }
+.el-button--primary {
+  --el-button-bg-color: var(--ds-accent);
+  --el-button-border-color: var(--ds-accent);
+  --el-button-hover-bg-color: var(--ds-accent-hover);
+  --el-button-hover-border-color: var(--ds-accent-hover);
+  --el-button-active-bg-color: var(--ds-accent-active);
+  color: #04222b; font-weight: 620;
+  box-shadow: 0 0 16px -4px var(--ds-accent);
+}
+.el-table { --el-table-border-color: var(--ds-border); --el-table-header-bg-color: var(--ds-surface-2); background: transparent; }
 .el-table th.el-table__cell { font-weight: 600; color: var(--ds-text-2); }
-.el-menu { border-right: 1px solid var(--ds-border); }
-.el-menu-item.is-active { color: var(--ds-accent); }
-.el-input__wrapper, .el-textarea__inner { border-radius: var(--ds-radius-sm); }
+.el-table tr, .el-table td.el-table__cell { background: transparent; }
+.el-tabs__item.is-active { color: var(--ds-accent); }
+.el-tabs__active-bar { background-color: var(--ds-accent); box-shadow: 0 0 10px var(--ds-accent); height: 2px; }
+.el-tabs__nav-wrap::after { background-color: var(--ds-border); }
+.el-input__wrapper, .el-textarea__inner, .el-select__wrapper {
+  border-radius: var(--ds-radius-sm); background-color: var(--ds-surface-2);
+}
+.el-dialog { border-radius: var(--ds-radius); border: 1px solid var(--ds-border); background: var(--ds-surface); }
+.el-overlay-dialog .el-dialog__title { font-family: var(--ds-display); font-weight: 600; letter-spacing: .01em; }
 :focus-visible { outline: none; box-shadow: var(--ds-ring); border-radius: var(--ds-radius-sm); }
+
+/* ---- staggered telemetry reveal on view load ---- */
+.ds-page > * { animation: ds-rise .42s cubic-bezier(.2,.7,.2,1) both; }
+.ds-page > *:nth-child(2) { animation-delay: .05s; }
+.ds-page > *:nth-child(3) { animation-delay: .10s; }
+.ds-page > *:nth-child(4) { animation-delay: .15s; }
+.ds-page > *:nth-child(5) { animation-delay: .20s; }
+@keyframes ds-rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .ds-page > * { animation: none; } }
+
+/* ---- brand mark in the OUI layout header (best-effort hook) ---- */
+.el-aside .logo, .layout-logo, .el-menu .brand {
+  font-family: var(--ds-display); font-weight: 700; letter-spacing: .02em;
+}
