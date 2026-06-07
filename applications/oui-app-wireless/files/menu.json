@@ -1,0 +1,12 @@
+{
+    "/network/wireless": {
+        "title": "Wireless",
+        "view": "wireless",
+        "index": 1,
+        "locales": {
+            "en": "Wireless",
+            "ru": "Wi-Fi",
+            "zh-CN": "无线"
+        }
+    }
+}

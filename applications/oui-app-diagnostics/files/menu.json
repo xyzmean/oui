@@ -1,0 +1,12 @@
+{
+    "/network/diagnostics": {
+        "title": "Diagnostics",
+        "view": "diagnostics",
+        "index": 5,
+        "locales": {
+            "en": "Diagnostics",
+            "ru": "Диагностика",
+            "zh-CN": "诊断"
+        }
+    }
+}

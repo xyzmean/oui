@@ -1,0 +1,12 @@
+{
+    "/network/firewall": {
+        "title": "Firewall",
+        "view": "firewall",
+        "index": 3,
+        "locales": {
+            "en": "Firewall",
+            "ru": "Брандмауэр",
+            "zh-CN": "防火墙"
+        }
+    }
+}

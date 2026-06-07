@@ -1,0 +1,12 @@
+{
+    "/network/routes": {
+        "title": "Routes",
+        "view": "routes",
+        "index": 4,
+        "locales": {
+            "en": "Routes",
+            "ru": "Маршруты",
+            "zh-CN": "路由"
+        }
+    }
+}

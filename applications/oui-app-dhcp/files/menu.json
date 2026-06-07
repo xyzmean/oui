@@ -1,0 +1,12 @@
+{
+    "/network/dhcp": {
+        "title": "DHCP",
+        "view": "dhcp",
+        "index": 2,
+        "locales": {
+            "en": "DHCP & DNS",
+            "ru": "DHCP и DNS",
+            "zh-CN": "DHCP"
+        }
+    }
+}
